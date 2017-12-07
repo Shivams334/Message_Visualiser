@@ -1,0 +1,16 @@
+
+#this command creates visualisations more vis: http://video.stackexchange.com/a/9697
+
+ffmpeg -i me.ogg -filter_complex "[0:a]showwaves=s=1280x720,format=yuv420p[vid]" -map "[vid]" -map 0:a -codec:v libx264 -crf 18 -preset fast -codec:a aac -strict -2 -b:a 192k vis.mp4
+
+wget https://i.imgur.com/u7ahEjD.mp4
+
+mv u7adEjd.mp4 overlay.mp4
+
+#extending the length of our overlay
+ffmpeg -f concat -i list.txt -c copy overlay_looped.mp4
+
+#overlaying the overlay over the visualisation
+ffmpeg -i vis.mp4 -vf "movie=overlay_looped.mp4[inner];[in][inner] overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2 [out]" final.mp4
+
+#but the problem is that in the video created the overlayed movie isn't transparent
