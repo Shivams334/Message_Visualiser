@@ -14,3 +14,4 @@ ffmpeg -f concat -i list.txt -c copy overlay_looped.mp4
 ffmpeg -i vis.mp4 -vf "movie=overlay_looped.mp4[inner];[in][inner] overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2 [out]" final.mp4
 
 #but the problem is that in the video created the overlayed movie isn't transparent
+#i am shivam
